@@ -47,6 +47,7 @@
 	}
 
 	var player =  {
+		
 		IMAGE: "images/player.png",
 		SIZE: 64,
 		numberOfFrames: 2,
@@ -85,116 +86,108 @@
 
 	var deadFall = false;
 
-	var backgroundX = 0;
-	var backgroundY = 0;
-	var backgroundWidth = 6000;
-	var backgroundHeight = 550;
+	var backgroundX = 0,
+		backgroundY = 0,
+		backgroundWidth = 6000,
+		backgroundHeight = 550;
 
-	var anitaX = 5750;
-	var anitaY = 190;
-	var anitaWidth = 100;
-	var anitaHeight = 151;
+	var anitaX = 5750,
+		anitaY = 190,
+		anitaWidth = 100,
+		anitaHeight = 151;
 
-	var fireball1X = 1488;
-	var fireball1Y = 230;
-	var fireball1Width = 15;
-	var fireball1Height = 90;
-	var fireball1Rotation = 0;
+	var fireball1X = 1488,
+		fireball1Y = 230,
+		fireball1Width = 15,
+		fireball1Height = 90,
+		fireball1Rotation = 0;
+		centerX1 = 1487.5,
+		centerY1 =  345,
+		angle1 = 0,
+		radius1 = 90,
+		speed1 = .03;
 
-	var centerX1 = 1487.5;
-	var centerY1 =  345;
-	var angle1 = 0;
-	var radius1 = 90;
-	var speed1 = .03;
+	var fireball2X = 2835,
+		fireball2Y = 280,
+		fireball2Width = 15,
+		fireball2Height = 90,
+		fireball2Rotation = 60,
+		centerX2 = 2872,
+		centerY2 =  280,
+		angle2 = 0,
+		radius2 = 83,
+		speed2 = .03;
 
-	var fireball2X = 2835;
-	var fireball2Y = 280;
-	var fireball2Width = 15;
-	var fireball2Height = 90;
-	var fireball2Rotation = 60;
+	var fireball3X = 3135,
+		fireball3Y = 280,
+		fireball3Width = 15,
+		fireball3Height = 90,
+		fireball3Rotation = 110,
+		centerX3 = 3168,
+		centerY3 =  280,
+		angle3 = 0,
+		radius3 = 83,
+		speed3 = .03;
 
-	var centerX2 = 2872;
-	var centerY2 =  280;
-	var angle2 = 0;
-	var radius2 = 83;
-	var speed2 = .03;
+	var fireball4X = 3305,
+		fireball4Y = 115,
+		fireball4Width = 15,
+		fireball4Height = 90,
+		fireball4Rotation = 260,
+		centerX4 = 3325,
+		centerY4 =  60,
+		angle4 = 0,
+		radius4 = 83,
+		speed4 = .03;
 
-	var fireball3X = 3135;
-	var fireball3Y = 280;
-	var fireball3Width = 15;
-	var fireball3Height = 90;
-	var fireball3Rotation = 110;
+	var fireball5X = 2060,
+		fireball5Y = 100,
+		fireball5Width = 15,
+		fireball5Height = 90,
+		fireball5Rotation = 60,
+		centerX5 = 2100,
+		centerY5 =  40,
+		angle5 = 0,
+		radius5 = 90,
+		speed5 = .03,
+		collX = 0,
+		collY = 0,
+		combinedHalfWidths = 0,
+		combinedHalfHeights = 0;
 
-	var centerX3 = 3168;
-	var centerY3 =  280;
-	var angle3 = 0;
-	var radius3 = 83;
-	var speed3 = .03;
+	var fireball6X = 2360,
+		fireball6Y = 100,
+		fireball6Width = 15,
+		fireball6Height = 90,
+		fireball6Rotation = 300,
+		centerX6 = 2400,
+		centerY6 =  40,
+		angle6 = 0,
+		radius6 = 90,
+		speed6 = .03;
 
-	var fireball4X = 3305;
-	var fireball4Y = 115;
-	var fireball4Width = 15;
-	var fireball4Height = 90;
-	var fireball4Rotation = 260;
+	var fireball7X = 2560,
+		fireball7Y = 100,
+		fireball7Width = 15,
+		fireball7Height = 90,
+		fireball7Rotation = 110,
+		centerX7 = 2600,
+		centerY7 =  40,
+		angle7 = 0,
+		radius7 = 90,
+		speed7 = .03;
 
-	var centerX4 = 3325;
-	var centerY4 =  60;
-	var angle4 = 0;
-	var radius4 = 83;
-	var speed4 = .03;
+	var bowserFireX = monsterX,
+		bowserFireY = 170,
+		bowserFireWidth = 50,
+		bowserFireHeight = 26,
+		bowserFireVX = -8,
 
-	var fireball5X = 2060;
-	var fireball5Y = 100;
-	var fireball5Width = 15;
-	var fireball5Height = 90;
-	var fireball5Rotation = 60;
-
-	var centerX5 = 2100;
-	var centerY5 =  40;
-	var angle5 = 0;
-	var radius5 = 90;
-	var speed5 = .03;
-		
-	var collX = 0;
-	var collY = 0;
-	var combinedHalfWidths = 0;
-	var combinedHalfHeights = 0;
-
-	var fireball6X = 2360;
-	var fireball6Y = 100;
-	var fireball6Width = 15;
-	var fireball6Height = 90;
-	var fireball6Rotation = 300;
-
-	var centerX6 = 2400;
-	var centerY6 =  40;
-	var angle6 = 0;
-	var radius6 = 90;
-	var speed6 = .03;
-
-	var fireball7X = 2560;
-	var fireball7Y = 100;
-	var fireball7Width = 15;
-	var fireball7Height = 90;
-	var fireball7Rotation = 110;
-
-	var centerX7 = 2600;
-	var centerY7 =  40;
-	var angle7 = 0;
-	var radius7 = 90;
-	var speed7 = .03;
-
-	var bowserFireX = monsterX;
-	var bowserFireY = 170;
-	var bowserFireWidth = 50;
-	var bowserFireHeight = 26;
-	var bowserFireVX = -8;
-
-	var platformX = 4900;
-	var platformY = 170;
-	var platformWidth = 120;
-	var platformHeight = 20;
-	var platformVX = 0;
+	var platformX = 4900,
+		platformY = 170,
+		platformWidth = 120,
+		platformHeight = 20,
+		platformVX = 0;
 
 	boxX = 50;
 	boxY = 200;
@@ -287,55 +280,47 @@
 	var marioDead = false;
 	var kaput = false;
 		
-		var Platform = {
+	var Platform = {
 
-	x: 150,
-	y: 100,
-	width: 20,
-	height: 20,
+		x: 150,
+		y: 100,
+		width: 20,
+		height: 20,
 
-	 centerX: function()
-	  {
-		return this.x + (this.width / 2);
-	  },
-	  centerY: function()
-	  {
-		return this.y + (this.height / 2);
-	  },
-	  halfWidth: function()
-	  {
-		return this.width / 2;
-	  },
-	  halfHeight: function()
-	  {
-		return this.height / 2;
-	  }
-
+		centerX: function() {
+			return this.x + (this.width / 2);
+		},
+		centerY: function() {
+			return this.y + (this.height / 2);
+		},
+		halfWidth: function() {
+			return this.width / 2;
+		},
+		halfHeight: function() {
+			return this.height / 2;
+		}
 	};
 
-
-
 	var map = [
-	[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-	[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-	[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-	[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-	[1,0,0,0,1,1,0,0,1,1,0,0,0,0,0,0,1],
-	[1,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,1],
-	[1,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,1],
-	[1,0,1,0,1,1,0,0,1,1,0,1,0,0,0,0,1],
-	[1,0,1,0,1,1,0,0,1,1,0,1,0,0,0,0,1],
-	[1,0,1,0,0,0,1,1,0,0,0,1,0,0,0,1,1],
-	[1,0,0,1,1,0,0,0,0,1,1,0,0,0,1,1,1],
-	[1,0,0,0,1,1,1,1,1,1,0,0,0,1,1,1,1],
-	[1,0,0,0,1,0,0,1,0,1,0,0,1,1,1,1,1],
-	[1,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1],
-	[1,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1],
-	[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-	[1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1],
-	[1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1],
-	[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1]
-
+		[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+		[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+		[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+		[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+		[1,0,0,0,1,1,0,0,1,1,0,0,0,0,0,0,1],
+		[1,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,1],
+		[1,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,1],
+		[1,0,1,0,1,1,0,0,1,1,0,1,0,0,0,0,1],
+		[1,0,1,0,1,1,0,0,1,1,0,1,0,0,0,0,1],
+		[1,0,1,0,0,0,1,1,0,0,0,1,0,0,0,1,1],
+		[1,0,0,1,1,0,0,0,0,1,1,0,0,0,1,1,1],
+		[1,0,0,0,1,1,1,1,1,1,0,0,0,1,1,1,1],
+		[1,0,0,0,1,0,0,1,0,1,0,0,1,1,1,1,1],
+		[1,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1],
+		[1,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1],
+		[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+		[1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1],
+		[1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1],
+		[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1]
 	];
 
 
@@ -739,22 +724,17 @@
 	}
 	}
 
-	if (playerX > 275 && monsterX > 400)
-	{
-	playerX = 275;
+	if (playerX > 275 && monsterX > 400) {
+		playerX = 275;
 	}
-	if (monsterX < 600)
-	{
-	if (platformX < 150)
-	{
-	platformVX = 3;
+	if (monsterX < 600)	{
+		if (platformX < 150) {
+			platformVX = 3;
+		}
+		if (platformX > 300) {
+			platformVX = -3;
+		}
 	}
-	if (platformX > 300)
-	{
-	platformVX = -3;
-	}
-	}
-
 
 	context.drawImage(wallBrown1,wallBrown1X,wallBrown1Y,wallBrown1Width,wallBrown1Height);
 	context.drawImage(wallBrown2,wallBrown2X,wallBrown2Y,wallBrown2Width,wallBrown2Height);
@@ -763,62 +743,51 @@
 	var collisionSide = "";
 
 
-	if (Math.abs(collX) < combinedHalfWidths && deadFall === false)
-	{
-	if (Math.abs(collY) < combinedHalfHeights && deadFall === false)
-	{
-	var overlapX = combinedHalfWidths - Math.abs(collX);
-	var overlapY = combinedHalfHeights - Math.abs(collY);
+	if (Math.abs(collX) < combinedHalfWidths && deadFall === false)	{
+		if (Math.abs(collY) < combinedHalfHeights && deadFall === false) {
+			var overlapX = combinedHalfWidths - Math.abs(collX);
+			var overlapY = combinedHalfHeights - Math.abs(collY);
 
-	if (overlapX >= overlapY)
-	{
-	if(collY > 0 && deadFall === false)
-	{
-	collisionSide = "top";
-	playerY = playerY + overlapY;
-	playerVY = 0;
-	bump.addEventListener("canplaythrough",musicPlayer4,false);
-	if (collisionSide = "top")
-	{
-	bump.play();
+		if (overlapX >= overlapY) {
+			if (collY > 0 && deadFall === false) {
+				collisionSide = "top";
+				playerY = playerY + overlapY;
+				playerVY = 0;
+				bump.addEventListener("canplaythrough",musicPlayer4,false);
+				
+				if (collisionSide = "top") {
+					bump.play();
+				}
+			}
+			else {
+				collisionSide = "bottom";
+				playerY = playerY - overlapY;
+				isJumping = false;
+			
+				if (deadFall === false) {
+					playerVY = -player.gravity;
+				}
+			}
+		}
+		else {
+			if (collX > 0 && deadFall === false) {
+				collisionSide = "left";
+				playerX = playerX + overlapX;
+			}
+			else {
+				collisionSide = "right";
+				playerX = playerX - overlapX;
+			}
+		}
 	}
+	else {
+		collisionSide = "none";
 	}
-	else
-	{
-	collisionSide = "bottom";
-	playerY = playerY - overlapY;
-	isJumping = false;
-	if (deadFall === false)
-	{
-	playerVY = -player.gravity;
+}
+	else	{
+		collisionSide = "none";
 	}
-	}
-	}
-	else
-	{
-	if (collX > 0 && deadFall === false)
-	{
-	collisionSide = "left";
-	playerX = playerX + overlapX;
-	}
-	else
-	{
-	collisionSide = "right";
-	playerX = playerX - overlapX;
-	}
-	}
-	}
-	else
-	{
-	collisionSide = "none";
-	}
-	}
-	else
-	{
-	collisionSide = "none";
-	}
-
-	}
+}
 
 	//BRIDGE COLLISION
 
@@ -829,31 +798,25 @@
 	var combinedHalfWidths2 = (player.SIZE / 2) + (bridgeWidth/ 2); 
 	var combinedHalfHeights2 = (player.SIZE / 2) + (bridgeHeight / 2); 
 
-	if (Math.abs(coll2X) < combinedHalfWidths2)
-	{
-	if (Math.abs(coll2Y) < combinedHalfHeights2)
-	{
-	var overlap2X = combinedHalfWidths2 - Math.abs(coll2X);
-	var overlap2Y = combinedHalfHeights2 - Math.abs(coll2Y);
+	if (Math.abs(coll2X) < combinedHalfWidths2) {
+		if (Math.abs(coll2Y) < combinedHalfHeights2) {
+			var overlap2X = combinedHalfWidths2 - Math.abs(coll2X);
+			var overlap2Y = combinedHalfHeights2 - Math.abs(coll2Y);
 
-	if (overlap2X >= overlap2Y && deadFall === false)
-	{
-	if(coll2Y > 0 && deadFall === false)
-	{
-	collisionSide2 = "top";
-	playerY = playerY + overlap2Y;
-	playerVY = 0;
-	}
-	else
-	{
-	collisionSide2 = "bottom";
-	playerY = playerY - overlap2Y;
-	isJumping = false;
-	if (deadFall === false)
-	{
-	playerVY = -player.gravity;
-	}
-	}
+		if (overlap2X >= overlap2Y && deadFall === false) {
+			if(coll2Y > 0 && deadFall === false) {
+				collisionSide2 = "top";
+				playerY = playerY + overlap2Y;
+				playerVY = 0;
+			}
+		else {
+			collisionSide2 = "bottom";
+			playerY = playerY - overlap2Y;
+			isJumping = false;
+			if (deadFall === false) {
+				playerVY = -player.gravity;
+			}
+		}
 	}
 	else
 	{
@@ -1932,66 +1895,53 @@
 
 	//MAKING THE MUSHROOM APPEAR + MOVING THE MUSHROOM
 
-	if (brown9Y < 140)
-	{
-	brown9Y = 140;
+	if (brown9Y < 140) {
+		brown9Y = 140;
 	}
-	if (brown9Y > 170)
-	{
-	brown9Y = 170;
+	if (brown9Y > 170) {
+		brown9Y = 170;
 	}
-	if(brown9Y < 170)
-	{
-	bumped = true;
-	bump.play();
-	brown9Y += 5;
+	if (brown9Y < 170) {
+		bumped = true;
+		bump.play();
+		brown9Y += 5;
 	}
-	if (bumped === true)
-	{
+	if (bumped) {
+		
+		if (!mushroomIn) {
+			shroom.play();
+			bump.play();
+			mushroomIn = true;
+			mushVisible = true;
+		}
+		if (mushVisible) {
+			context.drawImage(mushroom,mushroomX,mushroomY,mushroomWidth,mushroomHeight);
+		}
+		mushroomX += mushroomVX;
 
-	if (mushroomIn === false)
-	{
-	shroom.play();
-	bump.play();
-	mushroomIn = true;
-	mushVisible = true;
-	}
-	if (mushVisible === true)
-	{
-	context.drawImage(mushroom,mushroomX,mushroomY,mushroomWidth,mushroomHeight);
-	}
-	mushroomX += mushroomVX;
-
-	if (mushroomX > brown9X + 40 && mushroomY <= playerY + player.SIZE - mushroomWidth)
-	{
-	mushroomVX = 0;
-	mushroomY += mushroomVY;
-	}
-	if (mushroomY > playerY + player.SIZE - mushroomWidth && mushroomX < brown9X + 65)
-	{
-	mushroomVX = 3;
-	if (isJumping === false)
-	{
-	mushroomY = playerY + player.SIZE - mushroomWidth;
-	}
-	}
-	if (mushroomX > brown9X + 65)
-	{
-	mushroomVX = 0;
-
-	mushroomY += mushroomVY;
-	}
-
+		if (mushroomX > brown9X + 40 && mushroomY <= playerY + player.SIZE - mushroomWidth) {
+			mushroomVX = 0;
+			mushroomY += mushroomVY;
+		}
+		if (mushroomY > playerY + player.SIZE - mushroomWidth && mushroomX < brown9X + 65) {
+			mushroomVX = 3;
+			if (!isJumping) {
+				mushroomY = playerY + player.SIZE - mushroomWidth;
+			}
+		}
+		if (mushroomX > brown9X + 65) {
+			mushroomVX = 0;
+			mushroomY += mushroomVY;
+		}
 	}
 
 	context.drawImage(image2,player.sourceX,player.sourceY,player.SIZE,player.SIZE,playerX,playerY,player.SIZE,player.SIZE);
 	context.drawImage(anita,anitaX,anitaY,anitaWidth,anitaHeight);
 
 
-	if(marioDead === true)
-	{
-	window.removeEventListener("keydown",onKeyDown,false);
-	window.removeEventListener("keyup",onKeyUp,false);
+	if (marioDead) {
+		window.removeEventListener("keydown",onKeyDown,false);
+		window.removeEventListener("keyup",onKeyUp,false);
 	}
 
 	context.font = "20px verdana";
@@ -1999,108 +1949,81 @@
 	context.fillText("Use the left / right arrow keys to move.",50,370);
 	context.fillText("Press X to jump.",50,390);
 
-
-
-
-	if (bowserFireX < playerX - 300 && gotAxe === false)
-	{
-	bowserFireX = monsterX;
-	bowserFireY = monsterY + 30;
+	if (bowserFireX < playerX - 300 && !gotAxe) {
+		bowserFireX = monsterX;
+		bowserFireY = monsterY + 30;
 	}
-	if (gotAxe === true)
-	{
-	bridgeX -= 8;
+	if (gotAxe) {
+		bridgeX -= 8;
 	}
-
-	if (bridgeX < -400)
-	{
-	collapse.pause();
-	fall.play();
-	monsterY += 8;
+	if (bridgeX < -400) {
+		collapse.pause();
+		fall.play();
+		monsterY += 8;
 	}
-	if (monsterY > canvas.height && anitaX >= 375)
-	{
-	fall.pause();
-	music.pause();
-	monsterY = canvas.height + 100;
-	win.play();
-	boxVX = .2;
-	playerWon = true;
-	window.removeEventListener("keydown",onKeyDown,false);
-	window.removeEventListener("keyup",onKeyUp,false);
-	bridgeX = bridgeX;
-	platformY = -2000;
-	axeX = -2000;
+	if (monsterY > canvas.height && anitaX >= 375) {
+		fall.pause();
+		music.pause();
+		monsterY = canvas.height + 100;
+		win.play();
+		boxVX = .2;
+		playerWon = true;
+		window.removeEventListener("keydown",onKeyDown,false);
+		window.removeEventListener("keyup",onKeyUp,false);
+		bridgeX = bridgeX;
+		platformY = -2000;
+		axeX = -2000;
+	}
+	if (boxX13 < -250) {
+		win.pause();
+		platformX = -1000;
 	}
 
-	if (boxX13 < -250)
-	{
-	win.pause();
-	platformX = -1000;
+	if (boxX13 < 450 && boxX13 >= -200 && anitaX >= 375) {
+		playerX -= 2;
 	}
 
-	if (boxX13 < 450 && boxX13 >= -200 && anitaX >= 375)
-	{
-	playerX -= 2;
+	if (anitaX < 375) {
+		boxVX = 0;
+		fall.pause();
+		context.font = "20px verdana";
+		context.fillStyle = "white";
+		context.fillText("Sorry Mario, but our princess is in another castle!",20,100);
 	}
 
-	if (anitaX < 375)
-	{
-	boxVX = 0;
-	fall.pause();
-	context.font = "20px verdana";
-	context.fillStyle = "white";
-	context.fillText("Sorry Mario, but our princess is in another castle!",20,100);
-
+	if (bowserFireX - playerX < 200 && bowserFireX - playerX > 0) {
+		flame.play();
 	}
 
-	if (bowserFireX - playerX < 200 && bowserFireX - playerX > 0)
-	{
-	flame.play();
+	if (deadFall) {
+		playerVY = 20;
 	}
-
-	if (deadFall === true)
-	{
-	playerVY = 20;
+	if (playerX < 0) {
+		playerX = 0;
 	}
-
-
-
-	if (playerX < 0)
-	{
-	playerX = 0;
+	if (playerX > 550) {
+		playerX = 550;
 	}
-	if (playerX > 550)
-	{
-	playerX = 550;
+	if (playerY < 380 && !marioDead&& !deadFall) {
+		playerVY += player.gravity;
 	}
-
-	if (playerY < 380 && marioDead === false && deadFall === false)
-	{
-	playerVY += player.gravity;
+	if (playerY > 500) {
+		playerY = 500;
+		isJumping = true;
+		kaput = true;
 	}
-	if(playerY > 500)
-	{
-	playerY = 500;
-	isJumping = true;
-	kaput = true;
+	if (kaput) {
+		music.pause();
+		context.clearRect(0,0,canvas.width,canvas.height);
+		playerVX = 0;
+		playerVY = 0;
+		context.font = "20px verdana";
+		context.fillStyle = "white";
+		context.fillText("GAME OVER",canvas.width / 2 - 50,canvas.height / 2);
+		context.fillText("This game is still in development...", 120,370);
+		context.fillText("refresh the browser to play again.", 120,390);
 	}
-
-	if (kaput === true)
-	{
-	music.pause();
-	context.clearRect(0,0,canvas.width,canvas.height);
-	playerVX = 0;
-	playerVY = 0;
-	context.font = "20px verdana";
-	context.fillStyle = "white";
-	context.fillText("GAME OVER",canvas.width / 2 - 50,canvas.height / 2);
-	context.fillText("This game is still in development...", 120,370);
-	context.fillText("refresh the browser to play again.", 120,390);
-
-	}
-
-	}
+}
 	
 
 })();
