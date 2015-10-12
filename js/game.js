@@ -376,83 +376,63 @@
 	var bowserFire = new Image();
 	bowserFire.src = "images/bowserFire.png";
 
-	//WALL BROWNS
-
 	var wallBrown1 = new Image();
 	wallBrown1.src = "images/wallBrown.png";
 
 	var wallBrown2 = new Image();
 	wallBrown2.src = "images/wallBrown.png";
 
-	//PLATFORM
-
 	var platform = new Image();
 	platform.src = "images/platform.png";
 
-	//ARRAY O' BOXES
 
 	var boxes = [];
 
-	for (var i = 0; i < 24; i++)
-	{
-	var box = new Image();
-	box.src = "new/grey0.png";
-	boxes.push(box);
+	for (var i = 0; i < 24; i++) {
+		var box = new Image();
+		box.src = "new/grey0.png";
+		boxes.push(box);
 	}
-
-	//ARRAY O' BROWNS
 
 	var browns = [];
 
-	for (var j = 0; j < 10; j++)
-	{
-	var brown = new Image();
-	brown.src = "new/brown.png";
-	browns.push(brown);
+	for (var j = 0; j < 10; j++) {
+		var brown = new Image();
+		brown.src = "new/brown.png";
+		browns.push(brown);
 	}
-
-	//ARRAY O' LAVAS
 
 	var lavas = [];
 
-	for (var k = 0; k < 5; k++)
-	{
-	var lava = new Image();
-	lava.src = "new/lava0.png";
-	lavas.push(lava);
+	for (var k = 0; k < 5; k++) {
+		var lava = new Image();
+		lava.src = "new/lava0.png";
+		lavas.push(lava);
 	}
-
-	//ARRAY O' FIREBALLS
 
 	var fireballs = [];
 
-	for (var l = 0; l < 8; l++)
-	{
-	var fireball = new Image();
-	fireball.src = "images/fireball.png";
-	fireballs.push(fireball);
+	for (var l = 0; l < 8; l++) {
+		var fireball = new Image();
+		fireball.src = "images/fireball.png";
+		fireballs.push(fireball);
 	}
 
 	var longBox = new Image()
 	longBox.src = "images/longBox.png";
 
-	var playerVX = 0;
-	var playerVY = 0;
-	var playerAcceleration = 1;
-	var isJumping = false; 
-
-	var playerWon = false;
-
-	var boxVX = 0;
-
-	var angle = 0;
-	var centerX = 330;
-	var centerY = 230;
-	var radius = 50;
-	var speed = .2;
-
-	var playerCenterY = 330;
-
+	var playerVX = 0,
+		playerVY = 0,
+		playerAcceleration = 1,
+		isJumping = false,
+		playerWon = false,
+		boxVX = 0,
+		angle = 0,
+		centerX = 330,
+		centerY = 230,
+		radius = 50,
+		speed = .2,
+		playerCenterY = 330;
 
 	updateAnimation();
 
@@ -674,98 +654,89 @@
 					var overlapX = combinedHalfWidths - Math.abs(collX);
 					var overlapY = combinedHalfHeights - Math.abs(collY);
 
-		if (overlapX >= overlapY) {
-			if (collY > 0 && deadFall === false) {
-				collisionSide = "top";
-				playerY = playerY + overlapY;
-				playerVY = 0;
-				bump.addEventListener("canplaythrough",musicPlayer4,false);
-				
-				if (collisionSide = "top") {
-					bump.play();
+					if (overlapX >= overlapY) {
+						if (collY > 0 && deadFall === false) {
+							collisionSide = "top";
+							playerY = playerY + overlapY;
+							playerVY = 0;
+							bump.addEventListener("canplaythrough",musicPlayer4,false);	
+							if (collisionSide = "top") {
+								bump.play();
+							}
+						}
+						else {
+							collisionSide = "bottom";
+							playerY = playerY - overlapY;
+							isJumping = false;		
+							if (deadFall === false) {
+								playerVY = -player.gravity;
+							}
+						}
+					}
+					else {
+						if (collX > 0 && deadFall === false) {
+							collisionSide = "left";
+							playerX = playerX + overlapX;
+						}
+						else {
+							collisionSide = "right";
+							playerX = playerX - overlapX;
+						}
+					}
+				}
+				else {
+					collisionSide = "none";
 				}
 			}
 			else {
-				collisionSide = "bottom";
-				playerY = playerY - overlapY;
-				isJumping = false;
-			
-				if (deadFall === false) {
-					playerVY = -player.gravity;
+				collisionSide = "none";
+			}
+		}
+
+		//BRIDGE COLLISION
+
+		var collisionSide2 = "";
+		var coll2X = (playerX + (player.SIZE / 2)) - (bridgeX + (bridgeWidth / 2));
+		var coll2Y = (playerY + (player.SIZE / 2)) - ((bridgeY) + (bridgeHeight / 2));
+
+		var combinedHalfWidths2 = (player.SIZE / 2) + (bridgeWidth/ 2); 
+		var combinedHalfHeights2 = (player.SIZE / 2) + (bridgeHeight / 2); 
+
+		if (Math.abs(coll2X) < combinedHalfWidths2) {
+			if (Math.abs(coll2Y) < combinedHalfHeights2) {
+				var overlap2X = combinedHalfWidths2 - Math.abs(coll2X);
+				var overlap2Y = combinedHalfHeights2 - Math.abs(coll2Y);
+
+			if (overlap2X >= overlap2Y && !deadFall) {
+				if(coll2Y > 0 && !deadFall) {
+					collisionSide2 = "top";
+					playerY = playerY + overlap2Y;
+					playerVY = 0;
+				}
+				else {
+					collisionSide2 = "bottom";
+					playerY = playerY - overlap2Y;
+					isJumping = false;
+					if (!deadFall) {
+						playerVY = -player.gravity;
+					}
+				}
+			}
+			else {
+				if (coll2X > 0 && !deadFall) {
+					collisionSide2 = "left";
+				}
+				else {
+					collisionSide2 = "right";
 				}
 			}
 		}
 		else {
-			if (collX > 0 && deadFall === false) {
-				collisionSide = "left";
-				playerX = playerX + overlapX;
-			}
-			else {
-				collisionSide = "right";
-				playerX = playerX - overlapX;
-			}
+			collisionSide2 = "none";
 		}
 	}
 	else {
-		collisionSide = "none";
-	}
-}
-	else	{
-		collisionSide = "none";
-	}
-}
-
-	//BRIDGE COLLISION
-
-	var collisionSide2 = "";
-	var coll2X = (playerX + (player.SIZE / 2)) - (bridgeX + (bridgeWidth / 2));
-	var coll2Y = (playerY + (player.SIZE / 2)) - ((bridgeY) + (bridgeHeight / 2));
-
-	var combinedHalfWidths2 = (player.SIZE / 2) + (bridgeWidth/ 2); 
-	var combinedHalfHeights2 = (player.SIZE / 2) + (bridgeHeight / 2); 
-
-	if (Math.abs(coll2X) < combinedHalfWidths2) {
-		if (Math.abs(coll2Y) < combinedHalfHeights2) {
-			var overlap2X = combinedHalfWidths2 - Math.abs(coll2X);
-			var overlap2Y = combinedHalfHeights2 - Math.abs(coll2Y);
-
-		if (overlap2X >= overlap2Y && deadFall === false) {
-			if(coll2Y > 0 && deadFall === false) {
-				collisionSide2 = "top";
-				playerY = playerY + overlap2Y;
-				playerVY = 0;
-			}
-		else {
-			collisionSide2 = "bottom";
-			playerY = playerY - overlap2Y;
-			isJumping = false;
-			if (deadFall === false) {
-				playerVY = -player.gravity;
-			}
-		}
-	}
-	else
-	{
-	if (coll2X > 0 && deadFall === false)
-	{
-	collisionSide2 = "left";
-	//playerX = playerX + overlap2X;
-	}
-	else
-	{
-	collisionSide2 = "right";
-	//playerX = playerX - overlap2X;
-	}
-	}
-	}
-	else
-	{
-	collisionSide2 = "none";
-	}
-	}
-	else
-	{
-	collisionSide2 = "none";
+		collisionSide2 = "none";
 	}
 
 	//BOWSER FIRE COLLISION
@@ -1266,160 +1237,127 @@
 
 
 
-	for (var j = 0; j < browns.length; j++)
-	{
+	for (var j = 0; j < browns.length; j++) {
 
+		if (player.sourceX === 64 || player.sourceX === 128) {
+			if (j === 2) {
+				context.drawImage(brown,brown2X,brown2Y,brownWidth,brownHeight); 
+				var coll2X = (playerX + (player.SIZE / 2)) - (brown2X + (brownWidth - 50 / 2));
+				var coll2Y = (playerY + (player.SIZE / 2)) - (brown2Y + (brownHeight / 2));
+				var combinedHalfWidths2 = (player.SIZE / 2) + (brownWidth / 2); 
+				var combinedHalfHeights2 = (player.SIZE / 2) + (brownHeight / 2); 
+			}
+			if (j === 3) {
+				context.drawImage(brown,brown3X,brown3Y,brownWidth,brownHeight); 
+				var coll3X = (playerX + (player.SIZE / 2)) - (brown3X + (brownWidth - 50 / 2));
+				var coll3Y = (playerY + (player.SIZE / 2)) - (brown3Y +(brownHeight / 2));
+				var combinedHalfWidths3 = (player.SIZE / 2) + (brownWidth / 2); 
+				var combinedHalfHeights3 = (player.SIZE / 2) + (brownHeight / 2); 
+			}
+			if (j === 4) {
+				context.drawImage(brown,brown4X,brown4Y,brownWidth,brownHeight); 
+				var coll3X = (playerX + (player.SIZE / 2)) - (brown4X + (brownWidth - 50 / 2));
+				var coll3Y = (playerY + (player.SIZE / 2)) - (brown4Y +(brownHeight / 2));
+				var combinedHalfWidths3 = (player.SIZE / 2) + (brownWidth / 2); 
+				var combinedHalfHeights3 = (player.SIZE / 2) + (brownHeight / 2); 
+			}
+			if (j === 5) {
+				context.drawImage(brown,brown5X,brown5Y,brownWidth,brownHeight); 
+				var coll3X = (playerX + (player.SIZE / 2)) - (brown5X + (brownWidth - 50 / 2));
+				var coll3Y = (playerY + (player.SIZE / 2)) - (brown5Y +(brownHeight / 2));
+				var combinedHalfWidths3 = (player.SIZE / 2) + (brownWidth / 2); 
+				var combinedHalfHeights3 = (player.SIZE / 2) + (brownHeight / 2); 
+			}
+			if (j === 6) {
+				context.drawImage(brown,brown6X,brown6Y,brownWidth,brownHeight); 
+				var coll3X = (playerX + (player.SIZE / 2)) - (brown6X + (brownWidth - 50 / 2));
+				var coll3Y = (playerY + (player.SIZE / 2)) - (brown6Y +(brownHeight / 2));
+				var combinedHalfWidths3 = (player.SIZE / 2) + (brownWidth / 2); 
+				var combinedHalfHeights3 = (player.SIZE / 2) + (brownHeight / 2); 
+			}
+			if (j === 7) {
+				context.drawImage(brown,brown7X,brown7Y,brownWidth,brownHeight); 
+				var coll3X = (playerX + (player.SIZE / 2)) - (brown7X + (brownWidth - 50 / 2));
+				var coll3Y = (playerY + (player.SIZE / 2)) - (brown7Y +(brownHeight / 2));
+				var combinedHalfWidths3 = (player.SIZE / 2) + (brownWidth / 2); 
+				var combinedHalfHeights3 = (player.SIZE / 2) + (brownHeight / 2); 
+			}
+			if (j === 8) {
+				context.drawImage(brown,brown8X,brown8Y,brownWidth,brownHeight); 
+				var coll3X = (playerX + (player.SIZE / 2)) - (brown8X + (brownWidth - 50 / 2));
+				var coll3Y = (playerY + (player.SIZE / 2)) - (brown8Y +(brownHeight / 2));
+				var combinedHalfWidths3 = (player.SIZE / 2) + (brownWidth / 2); 
+				var combinedHalfHeights3 = (player.SIZE / 2) + (brownHeight / 2); 
+			}
+			if (j === 9) {
+				context.drawImage(brown,brown9X,brown9Y,brownWidth,brownHeight); 
+				var coll3X = (playerX + (player.SIZE / 2)) - (brown9X + (brownWidth/ 2));
+				var coll3Y = (playerY + (player.SIZE / 2)) - (brown9Y + (brownHeight / 2));
+				var combinedHalfWidths3 = (player.SIZE / 2) + (brownWidth / 2); 
+				var combinedHalfHeights3 = (player.SIZE / 2) + (brownHeight / 2); 
+			}
+		}
 
-
-	//BROWNS
-
-	if (player.sourceX === 64 || player.sourceX === 128)
-	{
-	if (j=== 2)
-	{
-	context.drawImage(brown,brown2X,brown2Y,brownWidth,brownHeight); 
-	var coll2X = (playerX + (player.SIZE / 2)) - (brown2X + (brownWidth - 50 / 2));
-	var coll2Y = (playerY + (player.SIZE / 2)) - (brown2Y + (brownHeight / 2));
-	var combinedHalfWidths2 = (player.SIZE / 2) + (brownWidth / 2); 
-	var combinedHalfHeights2 = (player.SIZE / 2) + (brownHeight / 2); 
-	}
-	if (j=== 3)
-	{
-	context.drawImage(brown,brown3X,brown3Y,brownWidth,brownHeight); 
-	var coll3X = (playerX + (player.SIZE / 2)) - (brown3X + (brownWidth - 50 / 2));
-	var coll3Y = (playerY + (player.SIZE / 2)) - (brown3Y +(brownHeight / 2));
-	var combinedHalfWidths3 = (player.SIZE / 2) + (brownWidth / 2); 
-	var combinedHalfHeights3 = (player.SIZE / 2) + (brownHeight / 2); 
-	}
-	if (j=== 4)
-	{
-	context.drawImage(brown,brown4X,brown4Y,brownWidth,brownHeight); 
-	var coll3X = (playerX + (player.SIZE / 2)) - (brown4X + (brownWidth - 50 / 2));
-	var coll3Y = (playerY + (player.SIZE / 2)) - (brown4Y +(brownHeight / 2));
-	var combinedHalfWidths3 = (player.SIZE / 2) + (brownWidth / 2); 
-	var combinedHalfHeights3 = (player.SIZE / 2) + (brownHeight / 2); 
-	}
-	if (j=== 5)
-	{
-	context.drawImage(brown,brown5X,brown5Y,brownWidth,brownHeight); 
-	var coll3X = (playerX + (player.SIZE / 2)) - (brown5X + (brownWidth - 50 / 2));
-	var coll3Y = (playerY + (player.SIZE / 2)) - (brown5Y +(brownHeight / 2));
-	var combinedHalfWidths3 = (player.SIZE / 2) + (brownWidth / 2); 
-	var combinedHalfHeights3 = (player.SIZE / 2) + (brownHeight / 2); 
-	}
-	if (j=== 6)
-	{
-	context.drawImage(brown,brown6X,brown6Y,brownWidth,brownHeight); 
-
-	var coll3X = (playerX + (player.SIZE / 2)) - (brown6X + (brownWidth - 50 / 2));
-	var coll3Y = (playerY + (player.SIZE / 2)) - (brown6Y +(brownHeight / 2));
-	var combinedHalfWidths3 = (player.SIZE / 2) + (brownWidth / 2); 
-	var combinedHalfHeights3 = (player.SIZE / 2) + (brownHeight / 2); 
-
-	}
-	if (j=== 7)
-	{
-	context.drawImage(brown,brown7X,brown7Y,brownWidth,brownHeight); 
-
-	var coll3X = (playerX + (player.SIZE / 2)) - (brown7X + (brownWidth - 50 / 2));
-	var coll3Y = (playerY + (player.SIZE / 2)) - (brown7Y +(brownHeight / 2));
-	var combinedHalfWidths3 = (player.SIZE / 2) + (brownWidth / 2); 
-	var combinedHalfHeights3 = (player.SIZE / 2) + (brownHeight / 2); 
-
-	}
-	if (j=== 8)
-	{
-	context.drawImage(brown,brown8X,brown8Y,brownWidth,brownHeight); 
-
-	var coll3X = (playerX + (player.SIZE / 2)) - (brown8X + (brownWidth - 50 / 2));
-	var coll3Y = (playerY + (player.SIZE / 2)) - (brown8Y +(brownHeight / 2));
-	var combinedHalfWidths3 = (player.SIZE / 2) + (brownWidth / 2); 
-	var combinedHalfHeights3 = (player.SIZE / 2) + (brownHeight / 2); 
-	}
-	if (j=== 9)
-	{
-	context.drawImage(brown,brown9X,brown9Y,brownWidth,brownHeight); 
-	var coll3X = (playerX + (player.SIZE / 2)) - (brown9X + (brownWidth/ 2));
-	var coll3Y = (playerY + (player.SIZE / 2)) - (brown9Y + (brownHeight / 2));
-	var combinedHalfWidths3 = (player.SIZE / 2) + (brownWidth / 2); 
-	var combinedHalfHeights3 = (player.SIZE / 2) + (brownHeight / 2); 
-	}
-	}
-
-	else if (player.sourceX === 0)
-	{
-	if (j=== 2)
-	{
-	context.drawImage(brown,brown2X,brown2Y,brownWidth,brownHeight); 
-	var coll2X = (playerX + (player.SIZE / 2)) - (brown2X + (brownWidth - 50 / 2));
-	var coll2Y = (playerY + (player.SIZE / 2)) - ((brown2Y) + (brownHeight / 2));
-	var combinedHalfWidths2 = (player.SIZE / 2) + (brownWidth / 2); 
-	var combinedHalfHeights2 = (player.SIZE / 2) + (brownHeight / 2); 
-	}
-	if (j=== 3)
-	{
-	context.drawImage(brown,brown3X,brown3Y,brownWidth,brownHeight); 
-	var coll3X = (playerX + (player.SIZE / 2)) - (brown3X + (brownWidth - 50 / 2));
-	var coll3Y = (playerY + (player.SIZE / 2)) - ((brown3Y) +(brownHeight / 2));
-	var combinedHalfWidths3 = (player.SIZE / 2) + (brownWidth / 2); 
-	var combinedHalfHeights3 = (player.SIZE / 2) + (brownHeight / 2); 
-	}
-	if (j=== 4)
-	{
-	context.drawImage(brown,brown4X,brown4Y,brownWidth,brownHeight); 
-	var coll3X = (playerX + (player.SIZE / 2)) - (brown4X + (brownWidth - 50 / 2));
-	var coll3Y = (playerY + (player.SIZE / 2)) - ((brown4Y) +(brownHeight / 2));
-	var combinedHalfWidths3 = (player.SIZE / 2) + (brownWidth / 2); 
-	var combinedHalfHeights3 = (player.SIZE / 2) + (brownHeight / 2); 
-	}
-	if (j=== 5)
-	{
-	context.drawImage(brown,brown5X,brown5Y,brownWidth,brownHeight); 
-	var coll3X = (playerX + (player.SIZE / 2)) - (brown5X + (brownWidth - 50 / 2));
-	var coll3Y = (playerY + (player.SIZE / 2)) - ((brown5Y ) +(brownHeight / 2));
-	var combinedHalfWidths3 = (player.SIZE / 2) + (brownWidth / 2); 
-	var combinedHalfHeights3 = (player.SIZE / 2) + (brownHeight / 2); 
-	}
-	if (j=== 6)
-	{
-	context.drawImage(brown,brown6X,brown6Y,brownWidth,brownHeight); 
-
-	var coll3X = (playerX + (player.SIZE / 2)) - (brown6X + (brownWidth - 50 / 2));
-	var coll3Y = (playerY + (player.SIZE / 2)) - ((brown6Y - 25) +(brownHeight / 2));
-	var combinedHalfWidths3 = (player.SIZE / 2) + (brownWidth / 2); 
-	var combinedHalfHeights3 = (player.SIZE / 2) + (brownHeight / 2); 
-
-	}
-	if (j=== 7)
-	{
-	context.drawImage(brown,brown7X,brown7Y,brownWidth,brownHeight); 
-
-	var coll3X = (playerX + (player.SIZE / 2)) - (brown7X + (brownWidth - 50 / 2));
-	var coll3Y = (playerY + (player.SIZE / 2)) - ((brown7Y - 25) +(brownHeight / 2));
-	var combinedHalfWidths3 = (player.SIZE / 2) + (brownWidth / 2); 
-	var combinedHalfHeights3 = (player.SIZE / 2) + (brownHeight / 2); 
-
-	}
-	if (j=== 8)
-	{
-	context.drawImage(brown,brown8X,brown8Y,brownWidth,brownHeight); 
-
-	var coll3X = (playerX + (player.SIZE / 2)) - (brown8X + (brownWidth - 50 / 2));
-	var coll3Y = (playerY + (player.SIZE / 2)) - ((brown8Y - 25) +(brownHeight / 2));
-	var combinedHalfWidths3 = (player.SIZE / 2) + (brownWidth / 2); 
-	var combinedHalfHeights3 = (player.SIZE / 2) + (brownHeight / 2); 
-	}
-	if (j=== 9)
-	{
-	context.drawImage(brown,brown9X,brown9Y,brownWidth,brownHeight); 
-	var coll3X = (playerX + (player.SIZE / 2)) - (brown9X + (brownWidth/ 2));
-	var coll3Y = (playerY + (player.SIZE / 2)) - ((brown9Y - 25) + (brownHeight / 2));
-	var combinedHalfWidths3 = (player.SIZE / 2) + (brownWidth / 2); 
-	var combinedHalfHeights3 = (player.SIZE / 2) + (brownHeight / 2); 
-	}
-
-	}
-	var collisionSide3 = "";
+		else if (player.sourceX === 0) {
+			
+			if (j === 2) {
+				context.drawImage(brown,brown2X,brown2Y,brownWidth,brownHeight); 
+				var coll2X = (playerX + (player.SIZE / 2)) - (brown2X + (brownWidth - 50 / 2));
+				var coll2Y = (playerY + (player.SIZE / 2)) - ((brown2Y) + (brownHeight / 2));
+				var combinedHalfWidths2 = (player.SIZE / 2) + (brownWidth / 2); 
+				var combinedHalfHeights2 = (player.SIZE / 2) + (brownHeight / 2); 
+			}
+			if (j === 3) {
+				context.drawImage(brown,brown3X,brown3Y,brownWidth,brownHeight); 
+				var coll3X = (playerX + (player.SIZE / 2)) - (brown3X + (brownWidth - 50 / 2));
+				var coll3Y = (playerY + (player.SIZE / 2)) - ((brown3Y) +(brownHeight / 2));
+				var combinedHalfWidths3 = (player.SIZE / 2) + (brownWidth / 2); 
+				var combinedHalfHeights3 = (player.SIZE / 2) + (brownHeight / 2); 
+			}
+			if (j === 4) {
+				context.drawImage(brown,brown4X,brown4Y,brownWidth,brownHeight); 
+				var coll3X = (playerX + (player.SIZE / 2)) - (brown4X + (brownWidth - 50 / 2));
+				var coll3Y = (playerY + (player.SIZE / 2)) - ((brown4Y) +(brownHeight / 2));
+				var combinedHalfWidths3 = (player.SIZE / 2) + (brownWidth / 2); 
+				var combinedHalfHeights3 = (player.SIZE / 2) + (brownHeight / 2); 
+			}
+			if (j === 5) {
+				context.drawImage(brown,brown5X,brown5Y,brownWidth,brownHeight); 
+				var coll3X = (playerX + (player.SIZE / 2)) - (brown5X + (brownWidth - 50 / 2));
+				var coll3Y = (playerY + (player.SIZE / 2)) - ((brown5Y ) +(brownHeight / 2));
+				var combinedHalfWidths3 = (player.SIZE / 2) + (brownWidth / 2); 
+				var combinedHalfHeights3 = (player.SIZE / 2) + (brownHeight / 2); 
+			}
+			if (j === 6) {
+				context.drawImage(brown,brown6X,brown6Y,brownWidth,brownHeight); 
+				var coll3X = (playerX + (player.SIZE / 2)) - (brown6X + (brownWidth - 50 / 2));
+				var coll3Y = (playerY + (player.SIZE / 2)) - ((brown6Y - 25) +(brownHeight / 2));
+				var combinedHalfWidths3 = (player.SIZE / 2) + (brownWidth / 2); 
+				var combinedHalfHeights3 = (player.SIZE / 2) + (brownHeight / 2); 
+			}
+			if (j === 7) {
+				context.drawImage(brown,brown7X,brown7Y,brownWidth,brownHeight); 
+				var coll3X = (playerX + (player.SIZE / 2)) - (brown7X + (brownWidth - 50 / 2));
+				var coll3Y = (playerY + (player.SIZE / 2)) - ((brown7Y - 25) +(brownHeight / 2));
+				var combinedHalfWidths3 = (player.SIZE / 2) + (brownWidth / 2); 
+				var combinedHalfHeights3 = (player.SIZE / 2) + (brownHeight / 2); 
+			}
+			if (j === 8) {
+				context.drawImage(brown,brown8X,brown8Y,brownWidth,brownHeight); 
+				var coll3X = (playerX + (player.SIZE / 2)) - (brown8X + (brownWidth - 50 / 2));
+				var coll3Y = (playerY + (player.SIZE / 2)) - ((brown8Y - 25) +(brownHeight / 2));
+				var combinedHalfWidths3 = (player.SIZE / 2) + (brownWidth / 2); 
+				var combinedHalfHeights3 = (player.SIZE / 2) + (brownHeight / 2); 
+			}
+			if (j === 9) {
+				context.drawImage(brown,brown9X,brown9Y,brownWidth,brownHeight); 
+				var coll3X = (playerX + (player.SIZE / 2)) - (brown9X + (brownWidth/ 2));
+				var coll3Y = (playerY + (player.SIZE / 2)) - ((brown9Y - 25) + (brownHeight / 2));
+				var combinedHalfWidths3 = (player.SIZE / 2) + (brownWidth / 2); 
+				var combinedHalfHeights3 = (player.SIZE / 2) + (brownHeight / 2); 
+			}
+		}
+		var collisionSide3 = "";
 
 	if (Math.abs(coll3X) < combinedHalfWidths3)
 	{
@@ -1476,101 +1414,75 @@
 	}
 	}
 
-	//LAVA COLLISION
+	for (var k = 0; k < lavas.length; k++) {
 
-	for (var k = 0; k < lavas.length; k++)
-	{
+		if (k === 1) {
+			context.drawImage(lava,lava1X,lava1Y,lava1Width,lava1Height); 
+			var coll1LavaX = (playerX + (player.SIZE / 2)) - (lava1X + (lava1Width - 50 / 2));
+			var coll1LavaY = (playerY + (player.SIZE / 2)) - (lava1Y + (lava1Height / 2));
+			var combinedLavaHalfWidths1 = (player.SIZE / 2) + (lava1Width / 2); 
+			var combinedLavaHalfHeights1 = (player.SIZE / 2) + (lava1Height / 2); 
+		}
+		if (k === 2) {
+			context.drawImage(lava,lava2X,lava2Y,lava2Width,lava2Height); 
+			var coll1LavaX = (playerX + (player.SIZE / 2)) - (lava2X + (lava2Width - 50 / 2));
+			var coll1LavaY = (playerY + (player.SIZE / 2)) - (lava2Y + (lava2Height / 2));
+			var combinedLavaHalfWidths1 = (player.SIZE / 2) + (lava2Width / 2); 
+			var combinedLavaHalfHeights1 = (player.SIZE / 2) + (lava2Height / 2); 
+		}
+		if (k === 3) {
+			context.drawImage(lava,lava3X,lava3Y,lava3Width,lava3Height); 
+			var coll1LavaX = (playerX + (player.SIZE / 2)) - (lava3X + (lava3Width - 50 / 2));
+			var coll1LavaY = (playerY + (player.SIZE / 2)) - (lava3Y + (lava3Height / 2));
+			var combinedLavaHalfWidths1 = (player.SIZE / 2) + (lava3Width / 2); 
+			var combinedLavaHalfHeights1 = (player.SIZE / 2) + (lava3Height / 2); 
+		}
+		if (k === 4) {
+			context.drawImage(lava,lava4X,lava4Y,lava4Width,lava4Height); 
+			var coll1LavaX = (playerX + (player.SIZE / 2)) - (lava4X + (lava4Width - 50 / 2));
+			var coll1LavaY = (playerY + (player.SIZE / 2)) - (lava4Y + (lava4Height / 2));
+			var combinedLavaHalfWidths1 = (player.SIZE / 2) + (lava4Width / 2); 
+			var combinedLavaHalfHeights1 = (player.SIZE / 2) + (lava4Height / 2); 
+		}
 
-	if (k=== 1)
-	{
-	context.drawImage(lava,lava1X,lava1Y,lava1Width,lava1Height); 
-	var coll1LavaX = (playerX + (player.SIZE / 2)) - (lava1X + (lava1Width - 50 / 2));
-	var coll1LavaY = (playerY + (player.SIZE / 2)) - (lava1Y + (lava1Height / 2));
-	var combinedLavaHalfWidths1 = (player.SIZE / 2) + (lava1Width / 2); 
-	var combinedLavaHalfHeights1 = (player.SIZE / 2) + (lava1Height / 2); 
-	}
-	if (k=== 2)
-	{
-	context.drawImage(lava,lava2X,lava2Y,lava2Width,lava2Height); 
-	var coll1LavaX = (playerX + (player.SIZE / 2)) - (lava2X + (lava2Width - 50 / 2));
-	var coll1LavaY = (playerY + (player.SIZE / 2)) - (lava2Y + (lava2Height / 2));
-	var combinedLavaHalfWidths1 = (player.SIZE / 2) + (lava2Width / 2); 
-	var combinedLavaHalfHeights1 = (player.SIZE / 2) + (lava2Height / 2); 
-	}
-	if (k=== 3)
-	{
-	context.drawImage(lava,lava3X,lava3Y,lava3Width,lava3Height); 
-	var coll1LavaX = (playerX + (player.SIZE / 2)) - (lava3X + (lava3Width - 50 / 2));
-	var coll1LavaY = (playerY + (player.SIZE / 2)) - (lava3Y + (lava3Height / 2));
-	var combinedLavaHalfWidths1 = (player.SIZE / 2) + (lava3Width / 2); 
-	var combinedLavaHalfHeights1 = (player.SIZE / 2) + (lava3Height / 2); 
-	}
-	if (k=== 4)
-	{
-	context.drawImage(lava,lava4X,lava4Y,lava4Width,lava4Height); 
-	var coll1LavaX = (playerX + (player.SIZE / 2)) - (lava4X + (lava4Width - 50 / 2));
-	var coll1LavaY = (playerY + (player.SIZE / 2)) - (lava4Y + (lava4Height / 2));
-	var combinedLavaHalfWidths1 = (player.SIZE / 2) + (lava4Width / 2); 
-	var combinedLavaHalfHeights1 = (player.SIZE / 2) + (lava4Height / 2); 
-	}
+		var lavaCollisionSide1 = "";
 
-	var lavaCollisionSide1 = "";
+		if (Math.abs(coll1LavaX) < combinedLavaHalfWidths1) {
+			if (Math.abs(coll1LavaY) < combinedLavaHalfHeights1) {
+	
+				var overlapLava1X = combinedLavaHalfWidths1 - Math.abs(coll1LavaX);
+				var overlapLava1Y = combinedLavaHalfHeights1 - Math.abs(coll1LavaY);
 
-	if (Math.abs(coll1LavaX) < combinedLavaHalfWidths1)
-	{
-	if (Math.abs(coll1LavaY) < combinedLavaHalfHeights1)
-	{
-	var overlapLava1X = combinedLavaHalfWidths1 - Math.abs(coll1LavaX);
-	var overlapLava1Y = combinedLavaHalfHeights1 - Math.abs(coll1LavaY);
-
-	if (overlapLava1X >= overlapLava1Y)
-	{
-	if(coll1LavaY > 0)
-	{
-	lavaCollisionSide1 = "top";
-	//playerY = playerY + overlapLava1Y;
-	//playerVY = 0;
-
-
-	}
-	else
-	{
-	lavaCollisionSide1 = "bottom";
-	//playerY = playerY - overlapLava1Y;
-	//isJumping = false;
-	//playerVY = -player.gravity;
-	window.removeEventListener("keydown",onKeyDown,false);
-	window.removeEventListener("keyup",onKeyUp,false);
-	dead.addEventListener("canplaythrough",musicPlayer6,false);
-	dead.play();
-	music.pause();
-	marioDead = true;
-
-	}
-	}
-	else
-	{
-	if (coll1LavaX > 0)
-	{
-	lavaCollisionSide3 = "left";
-	//playerX = playerX + overlapLava1X;
-	}
-	else
-	{
-	lavaCollisionSide3 = "right";
-	//playerX = playerX - overlapLava1X;
-	}
-	}
-	}
-	else
-	{
-	lavaCollisionSide3 = "none";
-	}
-	}
-	else
-	{
-	lavaCollisionSide3 = "none";
-	}
+				if (overlapLava1X >= overlapLava1Y) {
+					if(coll1LavaY > 0) {
+						lavaCollisionSide1 = "top";
+					}
+					else {
+						lavaCollisionSide1 = "bottom";
+						window.removeEventListener("keydown",onKeyDown,false);
+						window.removeEventListener("keyup",onKeyUp,false);
+						dead.addEventListener("canplaythrough",musicPlayer6,false);
+						dead.play();
+						music.pause();
+						marioDead = true;
+					}
+				}
+				else {
+					if (coll1LavaX > 0) {
+						lavaCollisionSide3 = "left";
+					}
+					else {
+						lavaCollisionSide3 = "right";
+					}
+				}
+			}
+			else {
+				lavaCollisionSide3 = "none";
+			}
+		}
+		else {
+			lavaCollisionSide3 = "none";
+		}
 	}
 
 
@@ -1579,8 +1491,7 @@
 
 	for (var l = 0; l < fireballs.length; l++) {
 
-
-		if (l=== 1) {
+		if (l === 1) {
 
 			var coll1FireballX = (playerX + (player.SIZE / 2)) - ((centerX1 + Math.sin(angle1) * -radius1) + (fireball1Width - 50 / 2));
 			var coll1FireballY = (playerY + (player.SIZE / 2)) - ((centerY1 + Math.cos(angle1) * -radius1) + (fireball1Height / 2));
@@ -1593,8 +1504,7 @@
 			context.drawImage(fireball,-fireball1Width / 2,-fireball1Height,fireball1Width,fireball1Height);
 			context.restore();
 		}
-
-		if (l=== 2) {
+		if (l === 2) {
 
 			var coll1FireballX = (playerX + (player.SIZE / 2)) - ((centerX2 + Math.sin(angle2) * -radius2) + (fireball2Width - 50 / 2));
 			var coll1FireballY = (playerY + (player.SIZE / 2)) - ((centerY2 + Math.cos(angle2) * -radius2) + (fireball2Height / 2));
@@ -1607,8 +1517,7 @@
 			context.drawImage(fireball,-fireball2Width / 2,-fireball2Height,fireball2Width,fireball2Height);
 			context.restore();
 		}
-		
-		if (l=== 3) {
+		if (l === 3) {
 
 			context.save();
 			context.translate(fireball3X + fireball3Width / 2 + 7.5,fireball3Y - 70 + fireball3Height);
@@ -1621,7 +1530,7 @@
 			var combinedFireballHalfWidths1 = (player.SIZE / 2) + (fireball3Width / 2); 
 			var combinedFireballHalfHeights1 = (player.SIZE / 2) + (fireball3Height / 2); 
 		}
-		if (l=== 4) {
+		if (l === 4) {
 
 			context.save();
 			context.translate(fireball4X + fireball4Width / 2 + 7.5,fireball4Y - 70 + fireball4Height);
@@ -1635,7 +1544,7 @@
 			var combinedFireballHalfWidths1 = (player.SIZE / 2) + (fireball4Width / 2); 
 			var combinedFireballHalfHeights1 = (player.SIZE / 2) + (fireball4Height / 2);  
 		}
-		if (l=== 5) {
+		if (l === 5) {
 
 			var coll1FireballX = (playerX + (player.SIZE / 2)) - ((centerX5 + Math.sin(angle5) * -radius5) + (fireball5Width - 50 / 2));
 			var coll1FireballY = (playerY + (player.SIZE / 2)) - ((centerY5 + Math.cos(angle5) * -radius5) + (fireball5Height / 2));
@@ -1648,7 +1557,7 @@
 			context.drawImage(fireball,-fireball5Width / 2,-fireball5Height,fireball5Width,fireball5Height);
 			context.restore();
 		}
-		if (l=== 6) {
+		if (l === 6) {
 
 			context.save();
 			context.translate(fireball6X + fireball6Width / 2 + 7.5,fireball6Y -70 + fireball6Height);
@@ -1662,7 +1571,7 @@
 			var combinedFireballHalfWidths1 = (player.SIZE / 2) + (fireball6Width / 2); 
 			var combinedFireballHalfHeights1 = (player.SIZE / 2) + (fireball6Height / 2); 
 		}
-		if (l=== 7) {
+		if (l === 7) {
 
 			context.save();
 			context.translate(fireball7X + fireball7Width / 2 + 7.5,fireball7Y -70 + fireball7Height);
