@@ -1,4 +1,7 @@
 
+//FINISH REFORMATTING LINES CA. 800-1200
+
+
 (function() { 
 
 	var theCanvas = document.getElementById("canvas"),
@@ -181,7 +184,7 @@
 		bowserFireY = 170,
 		bowserFireWidth = 50,
 		bowserFireHeight = 26,
-		bowserFireVX = -8,
+		bowserFireVX = -8;
 
 	var platformX = 4900,
 		platformY = 170,
@@ -748,117 +751,77 @@
 	var combinedHalfWidths6 = (player.SIZE / 2) + ((bowserFireWidth - 50)/ 2); 
 	var combinedHalfHeights6 = (player.SIZE / 2) + (bowserFireHeight / 2); 
 
-	if (Math.abs(coll6X) < combinedHalfWidths6)
-	{
-	if (Math.abs(coll6Y) < combinedHalfHeights6)
-	{
-	var overlap6X = combinedHalfWidths6 - Math.abs(coll6X);
-	var overlap6Y = combinedHalfHeights6 - Math.abs(coll6Y);
+	if (Math.abs(coll6X) < combinedHalfWidths6) {
+		if (Math.abs(coll6Y) < combinedHalfHeights6) {
+			var overlap6X = combinedHalfWidths6 - Math.abs(coll6X);
+			var overlap6Y = combinedHalfHeights6 - Math.abs(coll6Y);
 
-	if (overlap6X >= overlap6Y)
-	{
-	if(coll6Y > 0 && marioInvincible === false && marioDead === false)
-	{
+			if (overlap6X >= overlap6Y) {
+				if (coll6Y > 0 && !marioInvincible && !marioDead) {
 
+					if (player.sourceX === 64) {
+						marioInvincible = true;
+						player.sourceX = 0;
+						powerDown.play();
+					}
+					if (player.sourceX === 0 && !marioInvincible && !marioDead) {
+						deadFall = true;
+						dead.play();
+						music.pause();
+					}
 
-	//playerY = playerY + overlapLava1Y;
-	//playerVY = 0;
-	if (player.sourceX === 64)
-	{
-	marioInvincible = true;
-	player.sourceX = 0;
-	powerDown.play();
-	}
-	if (player.sourceX === 0 && marioInvincible === false && marioDead === false)
-	{
-	deadFall = true;
-	dead.play();
-	music.pause();
-	}
+				}
+				else {
 
-	}
-	else
-	{
-	console.log(" bottom ouch!");
-	//playerY = playerY - overlapLava1Y;
-	//isJumping = false;
-	//playerVY = -player.gravity;
+					if (player.sourceX === 64) {
+						marioInvincible = true;
+						player.sourceX = 0;
+						powerDown.play();
+					}
+					if (player.sourceX === 0 && !marioInvincible && !marioDead) {
+						deadFall = true;
+						dead.play();
+						music.pause();
+					}
+				}
+			}
+			else {
+				if (coll6X > 0 && !marioInvincible && !marioDead) {
 
-	//dead.addEventListener("canplaythrough",musicPlayer6,false);
-	//dead.play();
-	//music.pause();
-	//marioDead = true;
+					if (player.sourceX === 64) {
+						marioInvincible = true;
+						player.sourceX = 0;
+						powerDown.play();
+					}
+					if (player.sourceX === 0 && !marioInvincible) {
+						deadFall = true;
+						dead.play();
+						music.pause();
+					}
+				}
+				else {
 
-	if (player.sourceX === 64)
-	{
-	marioInvincible = true;
-	player.sourceX = 0;
-	powerDown.play();
+					if (player.sourceX === 64) {
+						marioInvincible = true;
+						player.sourceX = 0;
+						powerDown.play();
+					}
+					if (player.sourceX === 0 && !marioInvincible) {
+						deadFall = true;
+						dead.play();
+						music.pause();
+					}
+				}
+			}
+		}
+		else {
+			fireballCollisionSide3 = "none";
+		}
 	}
-	if (player.sourceX === 0 && marioInvincible === false && marioDead === false)
-	{
-	deadFall = true;
-	dead.play();
-	music.pause();
-	}
-	}
-	}
-	else
-	{
-	if (coll6X > 0 && marioInvincible === false && marioDead === false)
-	{
-
-	//playerX = playerX + overlapFireball1X;
-
-	if (player.sourceX === 64)
-	{
-	marioInvincible = true;
-	player.sourceX = 0;
-	powerDown.play();
-	}
-	if (player.sourceX === 0 && marioInvincible === false)
-	{
-	deadFall = true;
-	dead.play();
-	music.pause();
-	}
-	}
-	else
-	{
-
-	console.log("right ouch!");
-	//playerX = playerX - overlapFireball1X;
-
-
-	if (player.sourceX === 64)
-	{
-	marioInvincible = true;
-	player.sourceX = 0;
-	powerDown.play();
-	}
-	if (player.sourceX === 0 && marioInvincible === false)
-	{
-	deadFall = true;
-	dead.play();
-	music.pause();
-	}
-	}
-	}
-	}
-	else
-	{
-	fireballCollisionSide3 = "none";
-	}
-	}
-	else
-	{
-	fireballCollisionSide3 = "none";
+	else {
+		fireballCollisionSide3 = "none";
 	}
 
-
-
-
-	//COLLISION DETECTION WITH MUSHROOM
 
 	var mushCollX = (playerX + (player.SIZE / 2)) - (mushroomX + (mushroomWidth / 2));
 	var mushCollY = (playerY + (player.SIZE / 2)) - ((mushroomY - 5) + (mushroomHeight / 2));
@@ -1233,10 +1196,6 @@
 	collisionSide2 = "none";
 	}
 
-
-
-
-
 	for (var j = 0; j < browns.length; j++) {
 
 		if (player.sourceX === 64 || player.sourceX === 128) {
@@ -1359,60 +1318,47 @@
 		}
 		var collisionSide3 = "";
 
-	if (Math.abs(coll3X) < combinedHalfWidths3)
-	{
-	if (Math.abs(coll3Y) < combinedHalfHeights3)
-	{
-	var overlap3X = combinedHalfWidths3 - Math.abs(coll3X);
-	var overlap3Y = combinedHalfHeights3 - Math.abs(coll3Y);
+	if (Math.abs(coll3X) < combinedHalfWidths3) {
+		if (Math.abs(coll3Y) < combinedHalfHeights3) {
+			var overlap3X = combinedHalfWidths3 - Math.abs(coll3X);
+			var overlap3Y = combinedHalfHeights3 - Math.abs(coll3Y);
 
-	if (overlap3X >= overlap3Y && deadFall === false)
-	{
-	if(coll3Y > 0 && deadFall === false)
-	{
-	collisionSide3 = "top";
-	playerY = playerY + overlap3Y;
-	playerVY = 0;
-	bump.play();
-	if (j === 9)
-	{
-	brown9Y -= 30;
+		if (overlap3X >= overlap3Y && deadFall) {
+			if (coll3Y > 0 && !deadFall) {
+				collisionSide3 = "top";
+				playerY = playerY + overlap3Y;
+				playerVY = 0;
+				bump.play();
+				if (j === 9) {
+					brown9Y -= 30;
+				}
+			}
+			else {
+				collisionSide3 = "bottom";
+				playerY = playerY - overlap3Y;
+				isJumping = false;
+				playerVY = -player.gravity;
+			}
+		}
+		else {
+			if (coll3X > 0 && !deadFall) {
+				collisionSide3 = "left";
+				playerX = playerX + overlap3X;
+			}
+			else {
+				collisionSide3 = "right";
+				playerX = playerX - overlap3X;
+			}
+		}
 	}
-
+	else {
+		collisionSide3 = "none";
 	}
-	else
-	{
-	collisionSide3 = "bottom";
-	playerY = playerY - overlap3Y;
-	isJumping = false;
-	playerVY = -player.gravity;
-
-	}
-	}
-	else
-	{
-	if (coll3X > 0 && deadFall === false)
-	{
-	collisionSide3 = "left";
-	playerX = playerX + overlap3X;
-	}
-	else
-	{
-	collisionSide3 = "right";
-	playerX = playerX - overlap3X;
-	}
-	}
-	}
-	else
-	{
+}
+else {
 	collisionSide3 = "none";
-	}
-	}
-	else
-	{
-	collisionSide3 = "none";
-	}
-	}
+}
+}
 
 	for (var k = 0; k < lavas.length; k++) {
 
