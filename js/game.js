@@ -393,7 +393,7 @@
 
 	for (var i = 0; i < 24; i++) {
 		var box = new Image();
-		box.src = "new/grey0.png";
+		box.src = "images/grey.png";
 		boxes.push(box);
 	}
 
@@ -401,7 +401,7 @@
 
 	for (var j = 0; j < 10; j++) {
 		var brown = new Image();
-		brown.src = "new/brown.png";
+		brown.src = "images/brown.png";
 		browns.push(brown);
 	}
 
@@ -409,7 +409,7 @@
 
 	for (var k = 0; k < 5; k++) {
 		var lava = new Image();
-		lava.src = "new/lava0.png";
+		lava.src = "images/lava.png";
 		lavas.push(lava);
 	}
 
@@ -742,8 +742,6 @@
 		collisionSide2 = "none";
 	}
 
-	//BOWSER FIRE COLLISION
-
 
 	var coll6X = (playerX + (player.SIZE / 2)) - (bowserFireX + (bowserFireWidth / 2));
 	var coll6Y = (playerY + (player.SIZE / 2)) - (bowserFireY + (bowserFireHeight / 2));
@@ -829,80 +827,58 @@
 	var combinedHalfMushWidths = (player.SIZE / 2) + (mushroomWidth/ 2); 
 	var combinedHalfMushHeights = (player.SIZE / 2) + (mushroomHeight / 2); 
 
-	if (Math.abs(mushCollX) < combinedHalfMushWidths)
-	{
-	if (Math.abs(mushCollY) < combinedHalfMushHeights)
-	{
-	var overlapMushX = combinedHalfMushWidths - Math.abs(mushCollX);
-	var overlapMushY = combinedHalfMushHeights - Math.abs(mushCollY);
+	if (Math.abs(mushCollX) < combinedHalfMushWidths) {
+	   if (Math.abs(mushCollY) < combinedHalfMushHeights) {
+			var overlapMushX = combinedHalfMushWidths - Math.abs(mushCollX);
+			var overlapMushY = combinedHalfMushHeights - Math.abs(mushCollY);
 
-	if (overlapMushX >= overlapMushY && mushVisible === true)
-	{
-	if(mushCollY > 0)
-	{
-	if (marioDead === false)
-	{
-	mushVisible = false;
-	powerUp.addEventListener("canplaythrough",musicPlayer5,false);
-	powerUp.play();
-	player.sourceX = 64;
-	marioBig = true;
-	}
-	}
-	else
-	{
-	if (marioDead === false)
-	{
-	mushVisible = false;
-	powerUp.addEventListener("canplaythrough",musicPlayer5,false);
-	powerUp.play();
-	player.sourceX = 64;
-	marioBig = true;
-	}
-	}
-	}
-	else
-	{
-	if (mushCollX > 0)
-	{
-	if (mushVisible === true)
-	{
-	if (marioDead === false)
-	{
-	mushVisible = false;
-	powerUp.addEventListener("canplaythrough",musicPlayer5,false);
-	powerUp.play();
-	player.sourceX = 64;
-	marioBig = true;
-	}
-	}
-	}
-	else 
-	{
-	if (mushVisible === true)
-	{
-	if (marioDead === false)
-	{
-	mushVisible = false;
-	powerUp.addEventListener("canplaythrough",musicPlayer5,false);
-	powerUp.play();
-	player.sourceX = 64;
-	marioBig = true;
-	}
-	}
-	}
-	}
-	}
-	else
-	{
-
-	}
-	}
-	else
-	{
+			if (overlapMushX >= overlapMushY && mushVisible) {
+				if (mushCollY > 0) {
+					if (!marioDead) {
+						mushVisible = false;
+						powerUp.addEventListener("canplaythrough",musicPlayer5,false);
+						powerUp.play();
+						player.sourceX = 64;
+						marioBig = true;
+					}
+				}
+				else {
+					if (!marioDead) {
+						mushVisible = false;
+						powerUp.addEventListener("canplaythrough",musicPlayer5,false);
+						powerUp.play();
+						player.sourceX = 64;
+						marioBig = true;
+					}
+				}
+			}
+			else {
+				if (mushCollX > 0) {
+					if (mushVisible) {
+						if (!marioDead) {
+							mushVisible = false;
+							powerUp.addEventListener("canplaythrough",musicPlayer5,false);
+							powerUp.play();
+							player.sourceX = 64;
+							marioBig = true;
+						}
+					}
+				}
+				else {
+					if (mushVisible) {
+						if (!marioDead) {
+							mushVisible = false;
+							powerUp.addEventListener("canplaythrough",musicPlayer5,false);
+							powerUp.play();
+							player.sourceX = 64;
+							marioBig = true;
+						}
+					}
+				}
+			}
+		}
 	}
 
-	//COLLISION DETECTION WITH AXE
 
 	var axeCollX = (playerX + (player.SIZE / 2)) - (axeX + (axeWidth / 2));
 	var axeCollY = (playerY + (player.SIZE / 2)) - ((axeY - 5) + (axeHeight / 2));
@@ -910,111 +886,67 @@
 	var combinedHalfAxeWidths = (player.SIZE / 2) + (axeWidth/ 2); 
 	var combinedHalfAxeHeights = (player.SIZE / 2) + (axeHeight / 2); 
 
-	if (Math.abs(axeCollX) < combinedHalfAxeWidths)
-	{
-	if (Math.abs(axeCollY) < combinedHalfAxeHeights)
-	{
-	var overlapAxeX = combinedHalfAxeWidths - Math.abs(axeCollX);
-	var overlapAxeY = combinedHalfAxeHeights - Math.abs(axeCollY);
+	if (Math.abs(axeCollX) < combinedHalfAxeWidths) {
+		if (Math.abs(axeCollY) < combinedHalfAxeHeights) {
+			var overlapAxeX = combinedHalfAxeWidths - Math.abs(axeCollX);
+			var overlapAxeY = combinedHalfAxeHeights - Math.abs(axeCollY);
+			
+			if (overlapAxeX >= overlapAxeY) {
+				if (axeCollY > 0) {
+					collapse.play();
+					monsterVY = 0;
+					gotAxe = true;
 
-	if (overlapAxeX >= overlapAxeY)
-	{
-	if(axeCollY > 0)
-	{
-	//powerUp.addEventListener("canplaythrough",musicPlayer5,false);
-	collapse.play();
-	monsterVY = 0;
-	gotAxe = true;
+				}
+				else {
+					collapse.play();
+					monsterVY = 0;
+					gotAxe = true;
 
+				}
+			}
+		} 
 	}
-	else
-	{
-	//powerUp.addEventListener("canplaythrough",musicPlayer5,false);
-	collapse.play();
-	monsterVY = 0;
-	gotAxe = true;
-
-	}
-	}
-	else
-	{
-	if (axeCollX > 0)
-	{
-
-	}
-	else 
-	{
-
-	}
-	}
-	}
-	else
-	{
-
-	}
-	}
-	else
-	{
-	}
-
-	//COLLISION DETECTION WITH PLATFORM
-
+	
 	var platformCollX = (playerX + (player.SIZE / 2)) - (platformX + (platformWidth / 2));
 	var platformCollY = (playerY + (player.SIZE / 2)) - ((platformY - 5) + (platformHeight / 2));
 
 	var combinedHalfPlatformWidths = (player.SIZE / 2) + (platformWidth/ 2); 
 	var combinedHalfPlatformHeights = (player.SIZE / 2) + (platformHeight / 2); 
 
-	if (Math.abs(platformCollX) < combinedHalfPlatformWidths)
-	{
-	if (Math.abs(platformCollY) < combinedHalfPlatformHeights)
-	{
-	var overlapPlatformX = combinedHalfPlatformWidths - Math.abs(platformCollX);
-	var overlapPlatformY = combinedHalfPlatformHeights - Math.abs(platformCollY);
+	if (Math.abs(platformCollX) < combinedHalfPlatformWidths) {
+		if (Math.abs(platformCollY) < combinedHalfPlatformHeights) {
+			var overlapPlatformX = combinedHalfPlatformWidths - Math.abs(platformCollX);
+			var overlapPlatformY = combinedHalfPlatformHeights - Math.abs(platformCollY);
 
+		if (overlapPlatformX >= overlapPlatformY) {
+			if (platformCollY > 0) {
+				playerY = playerY + overlapPlatformY;
+				playerVY = 0;
+			}
+			else {
+				playerY = playerY - overlapPlatformY;
+				isJumping = false;
+				playerVY = -player.gravity;
+			}
+		}
+		else {
+			if (platformCollX > 0) {
 
-	if (overlapPlatformX >= overlapPlatformY)
-	{
-	if(platformCollY > 0)
-	{
-	playerY = playerY + overlapPlatformY;
-	playerVY = 0;
+				playerX = playerX + overlapPlatformX;
+			}
+			else {
+				playerX = playerX - overlapPlatformX;
+			}
+		}
 	}
-	else
-	{
-	playerY = playerY - overlapPlatformY;
-	isJumping = false;
-	playerVY = -player.gravity;
+	else {
+		collisionSide2 = "none";
 	}
-	}
-	else
-	{
-	if (platformCollX > 0)
-	{
-
-	playerX = playerX + overlapPlatformX;
-	}
-	else
-	{
-
-	playerX = playerX - overlapPlatformX;
-	}
-	}
-	}
-	else
-	{
+}
+else {
 	collisionSide2 = "none";
-	}
-	}
-	else
-	{
-	collisionSide2 = "none";
-	}
-
-
-	//COLLISION DETECTION WITH WALL BROWNS
-
-	//WALL BROWN 1
+}
 
 	var wallBrown1CollX = (playerX + (player.SIZE / 2)) - (wallBrown1X + (wallBrown1Width / 2));
 	var wallBrown1CollY = (playerY + (player.SIZE / 2)) - ((wallBrown1Y - 5) + (wallBrown1Height / 2));
@@ -1022,53 +954,39 @@
 	var combinedHalfWallBrown1Widths = (player.SIZE / 2) + (wallBrown1Width/ 2); 
 	var combinedHalfWallBrown1Heights = (player.SIZE / 2) + (wallBrown1Height / 2); 
 
-	if (Math.abs(wallBrown1CollX) < combinedHalfWallBrown1Widths)
-	{
-	if (Math.abs(wallBrown1CollY) < combinedHalfWallBrown1Heights)
-	{
-	var overlapWallBrown1X = combinedHalfWallBrown1Widths - Math.abs(wallBrown1CollX);
-	var overlapWallBrown1Y = combinedHalfWallBrown1Heights - Math.abs(wallBrown1CollY);
+	if (Math.abs(wallBrown1CollX) < combinedHalfWallBrown1Widths) {
+		if (Math.abs(wallBrown1CollY) < combinedHalfWallBrown1Heights) {
+			var overlapWallBrown1X = combinedHalfWallBrown1Widths - Math.abs(wallBrown1CollX);
+			var overlapWallBrown1Y = combinedHalfWallBrown1Heights - Math.abs(wallBrown1CollY);
 
-
-	if (overlapWallBrown1X >= overlapWallBrown1Y)
-	{
-	if(wallBrown1CollY > 0)
-	{
-	playerY = playerY + overlapWallBrown1Y;
-	playerVY = 0;
+			if (overlapWallBrown1X >= overlapWallBrown1Y) {
+				if (wallBrown1CollY > 0) {
+					playerY = playerY + overlapWallBrown1Y;
+					playerVY = 0;
+				}
+				else {
+					playerY = playerY - overlapWallBrown1Y;
+					isJumping = false;
+					playerVY = -player.gravity;
+				}
+			}
+			else {
+				if (wallBrown1CollX > 0) {
+					playerX = playerX + overlapWallBrown1X;
+				}
+				else {
+					playerX = playerX - overlapWallBrown1X;
+				}
+			}
+		}
+		else {
+			collisionSide2 = "none";
+		}
 	}
-	else
-	{
-	playerY = playerY - overlapWallBrown1Y;
-	isJumping = false;
-	playerVY = -player.gravity;
-	}
-	}
-	else
-	{
-	if (wallBrown1CollX > 0)
-	{
-
-	playerX = playerX + overlapWallBrown1X;
-	}
-	else
-	{
-
-	playerX = playerX - overlapWallBrown1X;
-	}
-	}
-	}
-	else
-	{
-	collisionSide2 = "none";
-	}
-	}
-	else
-	{
-	collisionSide2 = "none";
+	else {
+		collisionSide2 = "none";
 	}
 
-	//WALL BROWN 2
 
 	var wallBrown2CollX = (playerX + (player.SIZE / 2)) - (wallBrown2X + (wallBrown2Width / 2));
 	var wallBrown2CollY = (playerY + (player.SIZE / 2)) - ((wallBrown2Y - 5) + (wallBrown2Height / 2));
@@ -1076,124 +994,88 @@
 	var combinedHalfWallBrown2Widths = (player.SIZE / 2) + (wallBrown2Width/ 2); 
 	var combinedHalfWallBrown2Heights = (player.SIZE / 2) + (wallBrown2Height / 2); 
 
-	if (Math.abs(wallBrown2CollX) < combinedHalfWallBrown2Widths)
-	{
-	if (Math.abs(wallBrown2CollY) < combinedHalfWallBrown2Heights)
-	{
-	var overlapWallBrown2X = combinedHalfWallBrown2Widths - Math.abs(wallBrown2CollX);
-	var overlapWallBrown2Y = combinedHalfWallBrown2Heights - Math.abs(wallBrown2CollY);
-
-
-	if (overlapWallBrown2X >= overlapWallBrown2Y)
-	{
-	if(wallBrown2CollY > 0)
-	{
-	playerY = playerY + overlapWallBrown2Y;
-	playerVY = 0;
-	bump.play();
+	if (Math.abs(wallBrown2CollX) < combinedHalfWallBrown2Widths) {
+		if (Math.abs(wallBrown2CollY) < combinedHalfWallBrown2Heights) {
+			var overlapWallBrown2X = combinedHalfWallBrown2Widths - Math.abs(wallBrown2CollX);
+			var overlapWallBrown2Y = combinedHalfWallBrown2Heights - Math.abs(wallBrown2CollY);
+			
+			if (overlapWallBrown2X >= overlapWallBrown2Y) {
+				if (wallBrown2CollY > 0) {
+					playerY = playerY + overlapWallBrown2Y;
+					playerVY = 0;
+					bump.play();
+				}
+				else {
+					playerY = playerY - overlapWallBrown2Y;
+					isJumping = false;
+					playerVY = -player.gravity;
+				}
+			}
+			else {
+				if (wallBrown2CollX > 0) {
+					playerX = playerX + overlapWallBrown2X;
+				}
+				else {
+					playerX = playerX - overlapWallBrown2X;
+				}
+			}
+		}
+		else {
+			collisionSide2 = "none";
+		}
 	}
-	else
-	{
-	playerY = playerY - overlapWallBrown2Y;
-	isJumping = false;
-	playerVY = -player.gravity;
-	}
-	}
-	else
-	{
-	if (wallBrown2CollX > 0)
-	{
-
-	playerX = playerX + overlapWallBrown2X;
-	}
-	else
-	{
-
-	playerX = playerX - overlapWallBrown2X;
-	}
-	}
-	}
-	else
-	{
-	collisionSide2 = "none";
-	}
-	}
-	else
-	{
-	collisionSide2 = "none";
+	else {
+		collisionSide2 = "none";
 	}
 
-
-	//MONSTER COLLISION
-
+	
 	var monsterCollX = (playerX + (player.SIZE / 2)) - (monsterX + (monsterWidth / 2));
 	var monsterCollY = (playerY + (player.SIZE / 2)) - ((monsterY - 5) + (monsterHeight / 2));
 
 	var combinedHalfMonsterWidths = (player.SIZE / 2) + (monsterWidth/ 2); 
 	var combinedHalfMonsterHeights = (player.SIZE / 2) + (monsterHeight / 2); 
 
-	if (Math.abs(monsterCollX) < combinedHalfMonsterWidths)
-	{
-	if (Math.abs(monsterCollY) < combinedHalfMonsterHeights)
-	{
-	var overlapMonsterX = combinedHalfMonsterWidths - Math.abs(monsterCollX);
-	var overlapMonsterY = combinedHalfMonsterHeights - Math.abs(monsterCollY);
+	if (Math.abs(monsterCollX) < combinedHalfMonsterWidths) {
+		if (Math.abs(monsterCollY) < combinedHalfMonsterHeights) {
+			var overlapMonsterX = combinedHalfMonsterWidths - Math.abs(monsterCollX);
+			var overlapMonsterY = combinedHalfMonsterHeights - Math.abs(monsterCollY);
+			
+			if (overlapMonsterX >= overlapMonsterY) {
+				if (monsterCollY > 0) {
 
+					if (player.sourceX === 64) {
+						marioInvincible = true;
+						player.sourceX = 0;
+						powerDown.play();
+					}
+					if (player.sourceX === 0 && !marioInvincible && !marioDead) {
+						deadFall = true;
+						dead.play();
+						music.pause();
+					}
 
-	if (overlapMonsterX >= overlapMonsterY)
-	{
-	if(monsterCollY > 0)
-	{
-
-	if (player.sourceX === 64)
-	{
-	marioInvincible = true;
-	player.sourceX = 0;
-	powerDown.play();
+				}
+				else {
+					playerY = playerY - overlapMonsterY;
+					isJumping = false;
+					playerVY = -player.gravity;
+				}
+			}
+			else {
+				if (monsterCollX > 0) {
+					playerX = playerX + overlapMonsterX;
+				}
+				else {
+					playerX = playerX - overlapMonsterX;
+				}
+			}
+		}
+		else {
+			collisionSide2 = "none";
+		}
 	}
-	if (player.sourceX === 0 && marioInvincible === false && marioDead === false)
-	{
-	deadFall = true;
-	dead.play();
-	music.pause();
-	}
-	/*
-	playerY = playerY + overlapMonsterY;
-	playerVY = 0;
-	bump.play();
-	*/
-	}
-	else
-	{
-
-	playerY = playerY - overlapMonsterY;
-	isJumping = false;
-	playerVY = -player.gravity;
-
-	}
-	}
-	else
-	{
-	if (monsterCollX > 0)
-	{
-
-	playerX = playerX + overlapMonsterX;
-	}
-	else
-	{
-
-	playerX = playerX - overlapMonsterX;
-	}
-	}
-	}
-	else
-	{
-	collisionSide2 = "none";
-	}
-	}
-	else
-	{
-	collisionSide2 = "none";
+	else {
+		collisionSide2 = "none";
 	}
 
 	for (var j = 0; j < browns.length; j++) {
